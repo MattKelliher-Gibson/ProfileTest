@@ -1,0 +1,51 @@
+# This is a sample file, for detailed reference see: https://rudderlabs.github.io/pywht/
+inputs:
+  - name: rsIdentifies
+    contract:
+      is_optional: false
+      is_event_stream: true
+      with_entity_ids:
+        - user
+      with_columns:
+        - name: timestamp
+        - name: user_id
+        - name: anonymous_id
+        - name: id
+    app_defaults:
+      table: RUDDERSTACK_TEST.TEST_WEBSITE.identifies
+      occurred_at_col: timestamp
+      ids:
+        - select: "user_id"
+          type: user_id
+          entity: user
+          to_default_stitcher: true
+        - select: "anonymous_id"
+          type: anonymous_id
+          entity: user
+          to_default_stitcher: true
+        - select: "id"
+          type: id
+          entity: user
+          to_default_stitcher: true
+  - name: rsTracks
+    contract:
+      is_optional: false
+      is_event_stream: true
+      with_entity_ids:
+        - user
+      with_columns:
+        - name: timestamp
+        - name: user_id
+        - name: id
+    app_defaults:
+      table: RUDDERSTACK_TEST.TEST_WEBSITE.tracks
+      occurred_at_col: timestamp
+      ids:
+        - select: "user_id"
+          type: user_id
+          entity: user
+          to_default_stitcher: true
+        - select: "id"
+          type: id
+          entity: user
+          to_default_stitcher: true
